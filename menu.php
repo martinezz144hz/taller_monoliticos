@@ -174,7 +174,7 @@ $sprint_id = isset($_GET['sprint_id']) ? (int)$_GET['sprint_id'] : 0;
 $msg       = '';
 $msg_tipo  = 'ok';
 
-// ── GUARDAR SPRINT ────────────────────────────────────────────────────────────
+// guardar sprint
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_sprint'])) {
     $nombre       = trim($_POST['nombre']       ?? '');
     $fecha_inicio = trim($_POST['fecha_inicio'] ?? '');
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_sprint'])) {
     }
 }
 
-// ── GUARDAR ITEM ──────────────────────────────────────────────────────────────
+//  guardar item 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_item'])) {
     $item_sprint_id = (int)($_POST['sprint_id']     ?? 0);
     $categoria      = trim($_POST['categoria']       ?? '');
@@ -229,14 +229,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_item'])) {
     }
 }
 
-// ── ELIMINAR SPRINT ───────────────────────────────────────────────────────────
+//  eliminar sprint
 if ($accion === 'eliminar_sprint' && $id > 0) {
     $pdo->prepare("DELETE FROM sprints WHERE id=?")->execute([$id]);
     header("Location: index.php");
     exit;
 }
 
-// ── ELIMINAR ITEM ─────────────────────────────────────────────────────────────
+//  eliminar item
 if ($accion === 'eliminar_item' && $id > 0) {
     $stmt = $pdo->prepare("SELECT sprint_id FROM retro_items WHERE id=?");
     $stmt->execute([$id]);
@@ -247,7 +247,7 @@ if ($accion === 'eliminar_item' && $id > 0) {
     exit;
 }
 
-// ── CARGAR DATOS PARA EDICION ─────────────────────────────────────────────────
+//  cargar datos para edicion
 $sprint        = null;
 $item          = null;
 $sprints_lista = [];
@@ -403,7 +403,7 @@ $categorias = [
     <div class="msg <?= $msg_tipo === 'warn' ? 'warn' : '' ?>"><?= $msg ?></div>
 <?php endif; ?>
 
-<!-- ═══ MENU PRINCIPAL ════════════════════════════════════════════════════════ -->
+<!--  menu principal  -->
 <?php if ($accion === 'menu'): ?>
 <div class="card">
     <h2>Que deseas hacer?</h2>
@@ -419,7 +419,7 @@ $categorias = [
     </div>
 </div>
 
-<!-- ═══ FORMULARIO SPRINT ════════════════════════════════════════════════════ -->
+<!--  formulario sprint  -->
 <?php elseif ($accion === 'nuevo_sprint' || $accion === 'editar_sprint'): ?>
 <div class="card">
     <h2><?= $accion === 'editar_sprint' ? 'Editar Sprint' : 'Nuevo Sprint' ?></h2>
@@ -453,7 +453,7 @@ $categorias = [
     </form>
 </div>
 
-<!-- ═══ VER DETALLE DEL SPRINT ═══════════════════════════════════════════════ -->
+<!--  ver detalle del sprint -->
 <?php elseif ($accion === 'ver_sprint' && $sprint): ?>
 
 <?php
@@ -535,7 +535,7 @@ $todos_items = $items_stmt->fetchAll(PDO::FETCH_ASSOC);
     <a href="index.php" class="btn-sec" style="margin-top:20px; margin-left:0;">Volver al inicio</a>
 </div>
 
-<!-- ═══ FORMULARIO ITEM ══════════════════════════════════════════════════════ -->
+<!-- formulario item  -->
 <?php elseif ($accion === 'nuevo_item' || $accion === 'editar_item'): ?>
 <div class="card">
     <h2><?= $accion === 'editar_item' ? 'Editar Item' : 'Agregar Item a la Retrospectiva' ?></h2>
