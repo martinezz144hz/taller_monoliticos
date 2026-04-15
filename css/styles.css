@@ -1,0 +1,58 @@
+/* style.css - estilos sencillos para la app */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 8px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #0066cc;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+form {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+
+input, select, textarea, button {
+    width: 100%;
+    margin: 5px 0;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    background: #fff;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+th {
+    background: #eee;
+}
