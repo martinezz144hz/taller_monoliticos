@@ -1,5 +1,10 @@
 <?php
     class Sprint {
+        public $id;
+        public $nombre;
+        public $fecha_inicio;
+        public $fecha_fin;
+
         private $conn;
         private $table = "sprints";
 
@@ -14,25 +19,33 @@
         return $stmt;
         }
 
-        public function create(Sprint $sprint) {
+        public function getById($id) {
+            $query = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+            $stmt  = $this->conn->prepare($query);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function create($nombre, $fecha_inicio, $fecha_fin) {
             $query = "INSERT INTO {$this->table} (nombre, fecha_inicio, fecha_fin)
                     VALUES (:nombre, :fecha_inicio, :fecha_fin)";
             $stmt  = $this->conn->prepare($query);
-            $stmt->bindParam(':nombre',       $sprint->nombre);
-            $stmt->bindParam(':fecha_inicio', $sprint->fecha_inicio);
-            $stmt->bindParam(':fecha_fin',    $sprint->fecha_fin);
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':fecha_inicio', $fecha_inicio);
+            $stmt->bindParam(':fecha_fin', $fecha_fin);
             return $stmt->execute();
         }
 
-        public function update(Sprint $sprint) {
+        public function update($id, $nombre, $fecha_inicio, $fecha_fin) {
             $query = "UPDATE {$this->table}
             SET nombre = :nombre, fecha_inicio = :fecha_inicio, fecha_fin = :fecha_fin
             WHERE id = :id";
             $stmt  = $this->conn->prepare($query);
-            $stmt->bindParam(':id',           $sprint->id);
-            $stmt->bindParam(':nombre',       $sprint->nombre);
-            $stmt->bindParam(':fecha_inicio', $sprint->fecha_inicio);
-            $stmt->bindParam(':fecha_fin',    $sprint->fecha_fin);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':fecha_inicio', $fecha_inicio);
+            $stmt->bindParam(':fecha_fin', $fecha_fin);
             return $stmt->execute();
         }
 
@@ -42,6 +55,6 @@
             $stmt->bindParam(':id', $id);
             return $stmt->execute();
         }
-        
+
     }
 ?>
