@@ -8,7 +8,7 @@ require_once __DIR__ . '/../config/db.php';
 <head>
     <meta charset="UTF-8">
     <title>Registro de Retrospectivas</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <h1>Registro de Retrospectivas Scrum</h1>

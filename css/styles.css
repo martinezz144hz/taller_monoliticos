@@ -1,87 +1,46 @@
 /* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
     margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Encabezado azul */
+header {
+    background-color: #004080; /* azul oscuro */
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: #f4f4f9; /* texto claro */
+    margin: 0;
+    font-size: 28px;
+}
+
+/* Bloque gris */
+main {
+    background-color: #333; /* gris oscuro */
+    min-height: 300px;
+    padding: 40px;
+    text-align: center;
+}
+
+main ul {
+    list-style: none;
     padding: 0;
 }
 
-h1, h2 {
-    color: #333;
+main li {
+    margin: 15px 0;
 }
 
-nav {
-    background-color: #007bff;
-    padding: 10px;
-    text-align: center;
-}
-
-nav a {
-    color: white;
+main a {
+    color: #fff; /* enlaces blancos */
     text-decoration: none;
-    margin: 0 15px;
+    font-size: 20px;
     font-weight: bold;
 }
 
-nav a:hover {
+main a:hover {
     text-decoration: underline;
-}
-
-.container {
-    max-width: 800px;
-    margin: 30px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-form {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    max-width: 400px;
-    margin: 20px auto;
-}
-
-input, select, textarea, button {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-table {
-    width: 90%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #007bff;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
 }
