@@ -1,20 +1,17 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
+require_once dirname(dirname(__FILE__)) . '\controllers\sprintsController.php';
+require_once dirname(dirname(__FILE__)) . '\controllers\retroItemController.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'];
-    $inicio = $_POST['fecha_inicio'];
-    $fin = $_POST['fecha_fin'];
+    $controllerRetroIntem = new retroItemController();
+    $result = $controllerRetroIntem->showAllSprint();
 
-    $sql = "INSERT INTO sprints (nombre, fecha_inicio, fecha_fin) VALUES ('$nombre', '$inicio', '$fin')";
-    if ($conn->query($sql) === TRUE) {
-        echo "<p>Sprint creado correctamente ✅</p>";
-    } else {
-        echo "<p>Error: " . $conn->error . "</p>";
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $response = $controllerRetroIntem->CreateRetroItemSprit($_POST);    
+        echo '<p>'.$response.'</p>';   
     }
 }
-
-$result = $conn->query("SELECT * FROM sprints");
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +34,8 @@ $result = $conn->query("SELECT * FROM sprints");
 
     <h3>Lista de Sprints</h3>
     <ul>
-        <?php while ($row = $result->fetch_assoc()) { ?>
-            <li><?php echo $row['nombre'] . " (" . $row['fecha_inicio'] . " a " . $row['fecha_fin'] . ")"; ?></li>
+        <?php foreach ($result as $key => $value) {?>
+            <li><?php echo $value['nombre'] . " (" . $value['fecha_inicio'] . " a " . $value['fecha_fin'] . ")"; ?></li>
         <?php } ?>
     </ul>
 
