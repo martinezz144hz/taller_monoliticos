@@ -1,33 +1,38 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
-$result = $conn->query("SELECT r.id, r.categoria, r.descripcion, s.nombre AS sprint 
-                        FROM retro_items r 
-                        JOIN sprints s ON r.sprint_id = s.id");
+include '../config/db.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Retrospectivas</title>
+    <title>Retrospectivas anteriores</title>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <h2>Retrospectivas anteriores</h2>
-    <table border="1">
-        <tr>
-            <th>Sprint</th>
-            <th>Categoría</th>
-            <th>Descripción</th>
-        </tr>
-        <?php while ($row = $result->fetch_assoc()) { ?>
-            <tr>
-                <td><?php echo $row['sprint']; ?></td>
-                <td><?php echo $row['categoria']; ?></td>
-                <td><?php echo $row['descripcion']; ?></td>
-            </tr>
-        <?php } ?>
-    </table>
+    <!-- Encabezado azul -->
+    <header>
+        <h1>Retrospectivas anteriores</h1>
+    </header>
 
-    <p><a href="../index/index.php">⬅ Volver al inicio</a></p>
+    <!-- Contenido gris -->
+    <main>
+        <h2>Lista de retrospectivas</h2>
+        <table>
+            <tr>
+                <th>Título</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+            </tr>
+            <!-- Aquí irán los registros de la base -->
+            <tr>
+                <td>Ejemplo 1</td>
+                <td>2026-05-08</td>
+                <td>Descripción de prueba</td>
+            </tr>
+        </table>
+
+        <!-- Botón volver -->
+        <a href="../index/index.php" class="btn">← Volver al inicio</a>
+    </main>
 </body>
 </html>
