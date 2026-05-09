@@ -1,17 +1,12 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
+require_once dirname(dirname(__FILE__)) . '\controllers\retroItemController.php';
+$controllerRetroIntem = new retroItemController();
+$result = $controllerRetroIntem->showAllSprint();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sprint_id = $_POST['sprint_id'];
-    $categoria = $_POST['categoria'];
-    $descripcion = $_POST['descripcion'];
-
-    $sql = "INSERT INTO retro_items (sprint_id, categoria, descripcion) VALUES ('$sprint_id', '$categoria', '$descripcion')";
-    if ($conn->query($sql) === TRUE) {
-        echo "<p>Retro registrada correctamente ✅</p>";
-    } else {
-        echo "<p>Error: " . $conn->error . "</p>";
-    }
+    $response = $controllerRetroIntem->CreateRetroItemSprit($_POST);    
+    echo '<p>'.$response.'</p>';   
 }
 ?>
 
@@ -26,11 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST">
         <label>Sprint:</label>
         <select name="sprint_id">
-            <?php
-            $result = $conn->query("SELECT id, nombre FROM sprints");
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value='{$row['id']}'>{$row['nombre']}</option>";
-            }
+            <?php            
+            foreach ($result as $key => $value) {
+                echo "<option value='{$value['id']}'>{$value['nombre']}</option>";                
+            }            
             ?>
         </select><br><br>
 
@@ -49,6 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Guardar</button>
     </form>
 
-    <p><a href="../index/index.php">⬅ Volver al inicio</a></p>
+    <p><a href="../index.php">⬅ Volver al inicio</a></p>
 </body>
 </html>

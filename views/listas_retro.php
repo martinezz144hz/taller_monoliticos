@@ -1,8 +1,10 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
-$result = $conn->query("SELECT r.id, r.categoria, r.descripcion, s.nombre AS sprint 
-                        FROM retro_items r 
-                        JOIN sprints s ON r.sprint_id = s.id");
+
+require_once dirname(dirname(__FILE__)) . '\controllers\retroItemController.php';
+
+
+$retroItemController = new retroItemController();
+$result = $retroItemController->showAllRetroItem();
 ?>
 
 <!DOCTYPE html>
@@ -19,11 +21,12 @@ $result = $conn->query("SELECT r.id, r.categoria, r.descripcion, s.nombre AS spr
             <th>Categoría</th>
             <th>Descripción</th>
         </tr>
-        <?php while ($row = $result->fetch_assoc()) { ?>
+        <?php foreach ($result as $key => $value) {?>
+        
             <tr>
-                <td><?php echo $row['sprint']; ?></td>
-                <td><?php echo $row['categoria']; ?></td>
-                <td><?php echo $row['descripcion']; ?></td>
+                <td><?php echo $value['sprint']; ?></td>
+                <td><?php echo $value['categoria']; ?></td>
+                <td><?php echo $value['descripcion']; ?></td>
             </tr>
         <?php } ?>
     </table>
