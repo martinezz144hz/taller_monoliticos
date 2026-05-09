@@ -16,7 +16,7 @@
     <main>
         <div class="botones">
             <a href="../views/nueva_retro.php" class="btn">Crear nueva retrospectiva</a>
-            <a href="../views/listar_retros.php" class="btn">Ver retrospectivas anteriores</a>
+            <a href="../views/listas_retro.php" class="btn">Ver retrospectivas anteriores</a>
             <a href="../views/sprints.php" class="btn">Gestionar sprints</a>
         </div>
     </main>
