@@ -42,6 +42,6 @@ $result = $conn->query("SELECT * FROM sprints");
         <?php } ?>
     </ul>
 
-    <p><a href="../index/index.php">⬅ Volver al inicio</a></p>
+    <p><a href="../index.php">⬅ Volver al inicio</a></p>
 </body>
 </html>
