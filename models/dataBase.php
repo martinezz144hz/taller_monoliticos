@@ -11,13 +11,7 @@ class Database {
 
     private function __construct() {}
 
-    /**
-     * Devuelve la única instancia PDO de la aplicación.
-     * Si no existe, la crea con las opciones recomendadas.
-     *
-     * @return PDO
-     * @throws RuntimeException si la conexión falla
-     */
+
     public static function getInstance(): PDO {
         if (self::$instance === null) {
             $dsn = "mysql:host=" . self::$host
@@ -38,5 +32,30 @@ class Database {
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Ejecuta una consulta SELECT y devuelve los resultados.
+     
+     * @param string $sql
+     * @param array $params
+     * @return array
+     */
+    public static function query(string $sql, array $params = []): array {
+        $stmt = self::getInstance()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Ejecuta una sentencia INSERT, UPDATE o DELETE.
+     
+     * @param string $sql
+     * @param array $params
+     * @return bool
+     */
+    public static function execute(string $sql, array $params = []): bool {
+        $stmt = self::getInstance()->prepare($sql);
+        return $stmt->execute($params);
     }
 }

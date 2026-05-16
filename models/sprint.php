@@ -8,19 +8,19 @@ class Sprint {
     public $fecha_fin;
 
     private PDO $conn;
-    private $table = "sprints";
+    private string $table = "sprints";
 
     public function __construct() {
         $this->conn = Database::getInstance();
     }
 
-    public function getAll(){
-        $query = "SELECT * FROM {$this->table}";
-        $stmt  = $this->conn->prepare($query);            
+    
+    public function getAll(): array {
+        $sql = "SELECT * FROM {$this->table} ORDER BY fecha_inicio ASC";
+        $stmt = $this->conn->prepare($sql);            
         $stmt->execute();            
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
     public function create(string $nombre, string $fecha_inicio, string $fecha_fin): bool {
         $sql = "INSERT INTO {$this->table} (nombre, fecha_inicio, fecha_fin)
@@ -32,6 +32,20 @@ class Sprint {
         return $stmt->execute();
     }
 
-} 
+    public function getById(int $id): ?array {
+        $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
 
+    public function delete(int $id): bool {
+        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+}
 ?>

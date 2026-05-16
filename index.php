@@ -1,21 +1,22 @@
-<?php
-// index.php
-require_once __DIR__ . '/config/db.php';
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de Retrospectivas</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Registro de Retrospectivas Scrum</title>
+   
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <h1>Registro de Retrospectivas Scrum</h1>
+    
+    <header>
+        <h1>Registro de Retrospectivas Scrum</h1>
+    </header>
 
-    <ul>
-        <li><a href="views/nueva_retro.php">Crear nueva retrospectiva</a></li>
-        <li><a href="views/listas_retro.php">Ver retrospectivas anteriores</a></li>
-        <li><a href="views/sprints.php">Gestionar sprints</a></li>
-    </ul>
+    
+    <main>
+        <a href="../views/nueva_retro.php" class="btn">Crear nueva retrospectiva</a>
+        <a href="../views/listas_retro.php" class="btn">Ver retrospectivas anteriores</a>
+        <a href="../views/sprints.php" class="btn">Gestionar sprints</a>
+    </main>
 </body>
+</html>

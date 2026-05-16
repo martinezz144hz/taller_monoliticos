@@ -1,18 +1,17 @@
-<!-- sprints.php -->
+
 <?php
-require_once dirname(dirname(__FILE__)) . '\controllers\sprintsController.php';
-require_once dirname(dirname(__FILE__)) . '\controllers\retroItemController.php';
+require_once dirname(dirname(__FILE__)) . '/controllers/sprintsController.php';
+
+$controllerSprint = new SprintsController();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $controllerRetroIntem = new retroItemController();
-    $result = $controllerRetroIntem->showAllSprint();
-
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $response = $controllerRetroIntem->CreateRetroItemSprit($_POST);    
-        echo '<p>'.$response.'</p>';   
-    }
+    $response = $controllerSprint->createSprint($_POST);
+    echo '<p>'.$response.'</p>';
 }
+
+// Obtener lista de sprints
+$result = $controllerSprint->showAllSprints();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,17 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <!-- Encabezado azul -->
+    
     <header>
         <h1>Gestionar Sprints</h1>
     </header>
 
-    <h3>Lista de Sprints</h3>
-    <ul>
-        <?php foreach ($result as $key => $value) {?>
-            <li><?php echo $value['nombre'] . " (" . $value['fecha_inicio'] . " a " . $value['fecha_fin'] . ")"; ?></li>
-        <?php } ?>
-    </ul>
+    
+    <main>
+        <form method="POST">
+            <label for="nombre">Nombre del Sprint:</label>
+            <input type="text" id="nombre" name="nombre" required>
 
             <label for="fecha_inicio">Fecha inicio:</label>
             <input type="date" id="fecha_inicio" name="fecha_inicio" required>
@@ -43,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn">Guardar Sprint</button>
         </form>
 
-        <!-- Lista -->
+        
         <h3>Lista de Sprints</h3>
         <table>
             <tr>
@@ -52,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <th>Fecha fin</th>
             </tr>
             <?php
-            if ($result && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+            if ($result && count($result) > 0) {
+                foreach ($result as $row) {
                     echo "<tr>
                             <td>{$row['nombre']}</td>
                             <td>{$row['fecha_inicio']}</td>
@@ -66,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ?>
         </table>
 
-        <!-- Volver -->
-        <a href="../index/index.php" class="btn">← Volver al inicio</a>
+      
+        <a href="../index.php" class="btn">← Volver al inicio</a>
     </main>
 </body>
 </html>

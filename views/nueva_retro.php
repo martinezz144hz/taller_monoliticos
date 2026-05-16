@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Nueva Retrospectiva</title>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <h2>Crear nueva retrospectiva</h2>
