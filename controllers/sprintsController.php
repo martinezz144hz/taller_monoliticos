@@ -31,6 +31,9 @@ class SprintsController
         if (empty($params['fecha_fin'])) {
             return 'La fecha de fin no puede estar vacía';
         }
+        if ($params['fecha_fin']<$params['fecha_inicio']){
+            return 'La fecha de inicio debe ser antes que la fecha final';
+        }
 
         $ok = $this->sprintModel->create($params['nombre'], $params['fecha_inicio'], $params['fecha_fin']);
         return $ok ? 'Sprint creado con éxito' : 'Error al crear el sprint';
