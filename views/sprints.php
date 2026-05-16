@@ -1,11 +1,18 @@
 <!-- sprints.php -->
 <?php
-// Conexión a la base de datos
-include '../config/db.php';
+require_once dirname(dirname(__FILE__)) . '\controllers\sprintsController.php';
+require_once dirname(dirname(__FILE__)) . '\controllers\retroItemController.php';
 
-// Consulta a la tabla sprints
-$sql = "SELECT * FROM sprints";
-$result = $conn->query($sql);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $controllerRetroIntem = new retroItemController();
+    $result = $controllerRetroIntem->showAllSprint();
+
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $response = $controllerRetroIntem->CreateRetroItemSprit($_POST);    
+        echo '<p>'.$response.'</p>';   
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,12 +27,12 @@ $result = $conn->query($sql);
         <h1>Gestionar Sprints</h1>
     </header>
 
-    <!-- Contenido gris -->
-    <main>
-        <!-- Formulario -->
-        <form method="POST" action="../models/sprint.php">
-            <label for="nombre">Nombre del Sprint:</label>
-            <input type="text" id="nombre" name="nombre" required>
+    <h3>Lista de Sprints</h3>
+    <ul>
+        <?php foreach ($result as $key => $value) {?>
+            <li><?php echo $value['nombre'] . " (" . $value['fecha_inicio'] . " a " . $value['fecha_fin'] . ")"; ?></li>
+        <?php } ?>
+    </ul>
 
             <label for="fecha_inicio">Fecha inicio:</label>
             <input type="date" id="fecha_inicio" name="fecha_inicio" required>

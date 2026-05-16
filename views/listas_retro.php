@@ -1,5 +1,10 @@
 <?php
-include '../config/db.php';
+
+require_once dirname(dirname(__FILE__)) . '\controllers\retroItemController.php';
+
+
+$retroItemController = new retroItemController();
+$result = $retroItemController->showAllRetroItem();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,25 +14,19 @@ include '../config/db.php';
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <!-- Encabezado azul -->
-    <header>
-        <h1>Retrospectivas anteriores</h1>
-    </header>
-
-    <!-- Contenido gris -->
-    <main>
-        <h2>Lista de retrospectivas</h2>
-        <table>
+    <h2>Retrospectivas anteriores</h2>
+    <table border="1">
+        <tr>
+            <th>Sprint</th>
+            <th>Categoría</th>
+            <th>Descripción</th>
+        </tr>
+        <?php foreach ($result as $key => $value) {?>
+        
             <tr>
-                <th>Título</th>
-                <th>Fecha</th>
-                <th>Descripción</th>
-            </tr>
-            <!-- Aquí irán los registros de la base -->
-            <tr>
-                <td>Ejemplo 1</td>
-                <td>2026-05-08</td>
-                <td>Descripción de prueba</td>
+                <td><?php echo $value['sprint']; ?></td>
+                <td><?php echo $value['categoria']; ?></td>
+                <td><?php echo $value['descripcion']; ?></td>
             </tr>
         </table>
 
